@@ -1,0 +1,19 @@
+/* App.css */
+
+/* Set the background color to light blue */
+.App {
+  background-color: #f0f8ff; /* Light blue color code */
+}
+
+/* Set the image as a background with cover size */
+.Cover-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Ensure the image is behind other elements */
+  background-image: url('https://i.pinimg.com/564x/cc/90/07/cc90071ca5f954d59eacb4f337649d28.jpg');
+  background-size: cover;
+  background-position: center;
+}
