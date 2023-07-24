@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+It looks like you have placed the routes for fetching all appointments inside the `ApplicationController` class. However, the routes for appointments should be defined in the `AppointmentsController` class instead.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Here's what the correct structure should look like:
 
-## Available Scripts
+1. `application_controller.rb`:
 
-In the project directory, you can run:
+```ruby
+class ApplicationController < Sinatra::Base
+  set :default_content_type, 'application/json'
 
-### `npm start`
+  # Require necessary gems and libraries
+  require 'sinatra/base'
+  require 'sinatra/activerecord'
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  # Require your controllers
+  require_relative 'patients_controller'
+  require_relative 'appointments_controller'
+  require_relative 'doctors_controller'
+  require_relative 'departments_controller'
+  require_relative 'categories_controller'
+  require_relative 'invoices_controller'
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  # Your application settings and configuration can go here
 
-### `npm test`
+  # Optionally, you can add some helpers or middlewares here
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  # Optionally, you can also set a layout or other settings here
 
-### `npm run build`
+  # Run the application
+  # Only if running the app directly (not when running tests)
+  # run! if __FILE__ == $0
+end
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. `appointments_controller.rb`:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```ruby
+class AppointmentsController < Sinatra::Base
+  set :default_content_type, 'application/json'
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  # GET route to fetch all appointments
+  get "/appointments" do
+    appointments = Appointment.all
+    appointments.to_json
+  end
 
-### `npm run eject`
+  # POST route to create a new appointment
+  post "/appointments" do
+    appointment = Appointment.create(
+      appointment_date: params[:appointment_date],
+      start_time: params[:start_time],
+      # Add other attributes for the Appointment model here
+    )
+    appointment.to_json
+  end
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  # PUT route to update an existing appointment
+  put "/appointments/:id" do
+    appointment = Appointment.find(params[:id])
+    appointment.update(
+      appointment_date: params[:appointment_date],
+      start_time: params[:start_time],
+      # Add other attributes for the Appointment model here
+    )
+    appointment.to_json
+  end
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  # DELETE route to delete an appointment
+  delete "/appointments/:id" do
+    appointment = Appointment.find(params[:id])
+    appointment.destroy
+    { message: "Appointment deleted successfully!" }.to_json
+  end
+end
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+With this structure, the routes for fetching all appointments will be correctly defined in the `AppointmentsController` class, and you should be able to access them at `http://localhost:9292/appointments`. Remember to restart your server after making these changes.
