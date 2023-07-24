@@ -1,23 +1,17 @@
-import logo from './logo.svg';
+import React from 'react';
+
 import './App.css';
+
+// Import the Cover component
+import Cover from '/home/leila/development/code/phase-3/aa-frontend/src/cover.js';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* Render the Cover component */}
+      <Cover />
+
+     
     </div>
   );
 }
