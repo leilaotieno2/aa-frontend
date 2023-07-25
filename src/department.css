@@ -1,0 +1,59 @@
+/* Departments.css */
+
+/* Departments page container */
+.departments-page {
+    position: relative;
+    background-image: url("https://w0.peakpx.com/wallpaper/955/713/HD-wallpaper-doctor-medical.jpg");
+    background-size: cover;
+    min-height: 100vh;
+  }
+  
+  .departments-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+  }
+  
+  /* Departments grid */
+  .departments-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  /* Departments row */
+  .departments-row {
+    display: flex;
+    gap: 20px;
+  }
+  
+  /* Department card */
+  .department-card {
+    flex: 1;
+    max-width: 300px;
+    border: 2px solid #000;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  
+  /* Home Button */
+  .home-button {
+    margin-top: 20px;
+    margin-right: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #2962ad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Rest of your CSS styles for other components can go below */
+  

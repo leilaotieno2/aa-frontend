@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './App.css';
 
 const Cover = () => {
   const categories = ['Home', 'About Us', 'Departments', 'Appointments'];
+  const currentLocation = useLocation();
 
   return (
     <div className="cover-container">
@@ -11,13 +13,33 @@ const Cover = () => {
           <h1>A.A. Family Hospital</h1>
         </div>
         <div className="button-container">
-          {categories.map((category, index) => (
-            <button key={index}>{category}</button>
-          ))}
+          {categories.map((category, index) => {
+            const toLink = `/${category.toLowerCase().replace(' ', '-')}`;
+            const isHome = category === 'Home';
+            return (
+              <React.Fragment key={index}>
+                {isHome ? (
+                  <button
+                    className={currentLocation.pathname === '/' ? 'active' : ''}
+                  >
+                    {category}
+                  </button>
+                ) : (
+                  <Link to={toLink}>
+                    <button className={currentLocation.pathname === toLink ? 'active' : ''}>
+                      {category}
+                    </button>
+                  </Link>
+                )}
+              </React.Fragment>
+            );
+          })}
         </div>
         <div className="bottom-right-buttons">
           <button>Our Doctors</button>
-          <button>Admin</button>
+          <Link to="/admin"> {/* Add the Link component to navigate to the Admin component */}
+            <button>Admin</button>
+          </Link>
         </div>
       </div>
       <div className="image-container">

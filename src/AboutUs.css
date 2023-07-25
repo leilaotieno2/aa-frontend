@@ -1,0 +1,40 @@
+/* AboutUs.css */
+
+.about-us-container {
+    position: relative; /* Set as a reference for absolute positioning */
+  }
+  
+  .background-image {
+    width: 100%;
+    height: auto;
+    position: absolute; /* Position the image absolutely within the container */
+    top: 0;
+    left: 0;
+    z-index: -1; /* Place the image below other elements */
+  }
+  
+  .about-us-details {
+    position: relative; /* Allow other elements to flow normally */
+    padding: 20px;
+    background-color: rgba(122, 143, 245, 0.7); /* Semi-transparent background */
+    color: #fff;
+  }
+  /* AboutUs.css */
+
+/* Add any existing CSS styles here (if applicable) */
+
+/* Custom styling for the "Home" button */
+.home-button {
+    margin-top: 10px; /* Adjust this value to control the space between the text and the "Home" button */
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #2962ad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline from the link */
+    display: inline-block; /* Display as an inline element */
+  }
+  
