@@ -16,6 +16,7 @@ const Appointment = () => {
     insurancedetails: '',
     category: '',
   });
+  const [isAppointmentCreated, setIsAppointmentCreated] = useState(false); // State variable to track appointment creation
 
   useEffect(() => {
     fetchAppointments();
@@ -61,8 +62,6 @@ const Appointment = () => {
   const isStartTimeAlreadyBooked = (startTime) => {
     return appointments.some((appointment) => appointment.start_time === startTime);
   };
-
-  const [isAppointmentCreated, setIsAppointmentCreated] = useState(false); // State variable to track appointment creation
 
   const handleCreateAppointment = async (event) => {
     event.preventDefault();
@@ -229,28 +228,29 @@ const Appointment = () => {
             </select>
           </label>
         </div>
+
         <div className="form-group">
           <button type="submit">Create Appointment</button>
           <button onClick={() => window.location.href = '/'}>Home</button>
         </div>
       </form>
 
-      <div className="appointments-list">
-  <h3>Appointment List</h3>
-  {appointments.map((appointment) => (
-    <div key={appointment.id} className="appointment-item">
-      <p>Date: {appointment.appointment_date}</p>
-      <p>Start Time: {appointment.start_time}</p>
-      <p>Name: {appointment.name}</p>
-      {appointment.category ? (
-        <p>Category: {appointment.category.name}</p>
-      ) : (
-        <p>Category: N/A</p>
+      {isAppointmentCreated && appointments.length > 0 && (
+        <div className="appointments-list">
+          <h3>Patient Details</h3>
+          <div className="appointment-item">
+            <p>Date: {appointments[appointments.length - 1].appointment_date}</p>
+            <p>Start Time: {appointments[appointments.length - 1].start_time}</p>
+            <p>Name: {appointments[appointments.length - 1].name}</p>
+            {appointments[appointments.length - 1].category ? (
+              <p>Category: {appointments[appointments.length - 1].category.name}</p>
+            ) : (
+              <p>Category: N/A</p>
+            )}
+            <button onClick={() => handleDeleteAppointment(appointments[appointments.length - 1].id)}>Delete</button>
+          </div>
+        </div>
       )}
-      <button onClick={() => handleDeleteAppointment(appointment.id)}>Delete</button>
-    </div>
-  ))}
-</div>
     </div>
   );
 };
