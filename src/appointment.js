@@ -221,7 +221,7 @@ const Appointment = () => {
           </label>
         </div>
         <div className="form-group">
-          <button type="submit">Create Appointment</button>
+          <button type="submit">Create Appointment</button>  <button onClick={() => window.location.href = '/'}>Home</button>
         </div>
         
       </form>
