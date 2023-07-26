@@ -56,4 +56,12 @@
   }
   
   /* Rest of your CSS styles for other components can go below */
-  
+/* department.css */
+
+/* ... Your existing CSS rules ... */
+
+/* Add this rule to remove underline from links inside department-card */
+.department-card a {
+    text-decoration: none;
+  }
+    

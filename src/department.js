@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import '/home/leila/development/code/phase-3/aa-frontend/src/department.css';
 
 const Departments = () => {
@@ -37,15 +38,15 @@ const Departments = () => {
           {groupDepartmentsIntoRows(departments, 5).map((row, rowIndex) => (
             <div key={rowIndex} className="departments-row">
               {row.map((department) => (
-                <div key={department.id} className="department-card">
+                <Link key={department.id} to="/appointments" className="department-card">
+                  {/* Add department information to the card */}
                   <Card>
-                    {/* Add department information to the card */}
                     <Card.Body>
                       <Card.Title>{department.name}</Card.Title>
                       <Card.Text>{department.description}</Card.Text>
                     </Card.Body>
                   </Card>
-                </div>
+                </Link>
               ))}
             </div>
           ))}

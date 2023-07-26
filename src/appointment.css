@@ -1,63 +1,71 @@
-/* Add your custom styles for the Appointment component */
-.Appointment {
-    font-family: Arial, sans-serif;
-    max-width: 600px;
-    margin: 0 auto;
+
+  
+
+  
+  
+  
+  /* Adjust the background color of the form */
+  .Appointment-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.8); /* Added a transparent white background */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
   }
   
-  h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
+  /* Rest of the existing styles ... */
   
-  form {
+  .Appointment-element-container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  label {
-    font-size: 16px;
+    width: 100%;
     margin-bottom: 10px;
   }
   
-  input[type="date"],
-  input[type="time"] {
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  .Appointment-label {
+    font-weight: bold;
+    margin-bottom: 5px;
   }
   
-  button[type="submit"],
-  button[type="button"] {
+  .Appointment-input,
+  .Appointment-select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .Appointment-select {
+    cursor: pointer;
+  }
+  
+  .Appointment-button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #2962ad;
-    color: white;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
     margin-top: 10px;
   }
   
-  ul {
-    list-style: none;
-    padding: 0;
+  .Appointment-button[type="submit"]:hover {
+    background-color: #0056b3;
   }
   
-  li {
-    font-size: 16px;
-    margin-bottom: 10px;
+  .form-container {
+    display: flex;
+    flex-direction: column;
   }
   
-  button.delete-button {
-    background-color: #d63031;
-  }
-  
-  /* Add a bit of spacing between the list items */
-  li + li {
-    margin-top: 5px;
+  .form-group {
+    margin-bottom: 40px;
   }
   
