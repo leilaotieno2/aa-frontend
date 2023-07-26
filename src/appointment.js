@@ -1,111 +1,116 @@
 import React, { useState, useEffect } from 'react';
-import "/home/leila/development/code/phase-3/aa-frontend/src/appointment.css"
-const AppointmentForm = () => {
-  // State to hold form data
-  const [name, setName] = useState('');
-  const [gender, setGender] = useState('');
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [appointmentDate, setAppointmentDate] = useState('');
-  const [contactInfo, setContactInfo] = useState('');
-  const [insuranceDetails, setInsuranceDetails] = useState('');
 
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here, you can submit the form data to your backend or perform other actions.
-    // For example: You can send the data to your server using fetch or Axios.
-    // Make sure to include any additional fields like contact info or insurance details.
-    console.log('Form submitted!');
-    console.log('Name:', name);
-    console.log('Gender:', gender);
-    console.log('Selected Category:', selectedCategory);
-    console.log('Appointment Date:', appointmentDate);
-    console.log('Contact Info:', contactInfo);
-    console.log('Insurance Details:', insuranceDetails);
-  };
+const Appointment = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    age: '',
+    gender: '',
+    contact_info: '',
+    medical_history: '',
+    insurance_details: '',
+    category_id: '',
+  });
 
-  // Fetch categories from the server on component mount
+ 
+  const [categoryOptions, setCategoryOptions] = useState([]);
+
+  // Fetch insurance details and category IDs from the backend
   useEffect(() => {
-    // Replace the URL with the actual API endpoint to fetch categories
+    // Fetch insurance details
+    fetch('http://localhost:9292/insurance')
+      .then((response) => response.json())
+      
+      .catch((error) => console.error('Error fetching insurance details:', error));
+
+    // Fetch category IDs
     fetch('http://localhost:9292/categories')
       .then((response) => response.json())
-      .then((data) => {
-        setCategories(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching categories:', error);
-      });
+      .then((data) => setCategoryOptions(data))
+      .catch((error) => console.error('Error fetching category IDs:', error));
   }, []);
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  
+    // Send the form data to the backend
+    fetch('http://localhost:9292/patients', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response from the backend if needed
+        console.log('Data successfully added to backend:', data);
+      })
+      .catch((error) => console.error('Error adding data to backend:', error));
+  };
+  
   return (
     <div>
       <h2>Appointment Form</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Gender:</label>
-          <select value={gender} onChange={(e) => setGender(e.target.value)} required>
+        <label>
+          Name:
+          <input type="text" name="name" value={formData.name} onChange={handleChange} />
+        </label>
+        <br />
+        <label>
+          Age:
+          <input type="number" name="age" value={formData.age} onChange={handleChange} />
+        </label>
+        <br />
+        <label>
+          Gender:
+          <select name="gender" value={formData.gender} onChange={handleChange}>
             <option value="">Select Gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
           </select>
-        </div>
-        <div>
-          <label>Category:</label>
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            required
-          >
-            <option value="">Select Category</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label>Appointment Date:</label>
-          <input
-            type="date"
-            value={appointmentDate}
-            onChange={(e) => setAppointmentDate(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Contact Information:</label>
-          <input
-            type="text"
-            value={contactInfo}
-            onChange={(e) => setContactInfo(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Insurance Details:</label>
-          <input
-            type="text"
-            value={insuranceDetails}
-            onChange={(e) => setInsuranceDetails(e.target.value)}
-            required
-          />
-        </div>
+        </label>
+        <br />
+        <label>
+  Contact Info:
+  <input type="text" name="contact_info" value={formData.contact_info} onChange={handleChange} />
+</label>
+
+        <br />
+        <label>
+          Medical History:
+          <textarea  type="text" name="medical_history" value={formData.medical_history} onChange={handleChange} />
+        </label>
+        <br />
+        <label>
+          Insurance Details:
+          <input type="text" name="insuarance_details" value={formData.insurance_details} onChange={handleChange} />
+        </label>
+        <br />
+        <label>
+  Category ID:
+  <select name="category_id" value={formData.category_id} onChange={handleChange}>
+    <option value="">Select Category</option>
+    {categoryOptions.map((category) => (
+      <option key={category.id} value={category.id}>
+        {category.name}
+      </option>
+    ))}
+  </select>
+</label>
+
+
+        <br />
         <button type="submit">Submit</button>
       </form>
     </div>
   );
 };
 
-export default AppointmentForm;
+export default Appointment;
