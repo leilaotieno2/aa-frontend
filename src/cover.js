@@ -36,7 +36,7 @@ const Cover = () => {
           })}
         </div>
         <div className="bottom-right-buttons">
-          <button>Our Doctors</button>
+         
           <Link to="/admin"> {/* Add the Link component to navigate to the Admin component */}
             <button>Admin</button>
           </Link>

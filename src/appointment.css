@@ -1,80 +1,32 @@
-.Appointment-container {
-    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20190223/ourmid/pngtree-doctor-running-minimalist-background-structure-image_66071.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    padding: 20px;
-  }
-  
-  /* Add additional styling for the form and other elements if needed */
-  
-  
+/* appointment.css */
 
-  
-  
-  
-  /* Adjust the background color of the form */
-  .Appointment-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-    background-color: rgba(255, 255, 255, 0.8); /* Added a transparent white background */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  }
-  
-  /* Rest of the existing styles ... */
-  
-  .Appointment-element-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  .Appointment-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .Appointment-input,
-  .Appointment-select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    width: 100%;
-  }
-  
-  .Appointment-select {
-    cursor: pointer;
-  }
-  
-  .Appointment-button[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-  }
-  
-  .Appointment-button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  .form-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-group {
-    margin-bottom: 40px;
-  }
-  
+/* Styling for the container */
+.appointment-form-container {
+  background-color: rgba(0, 0, 255, 0.1); /* Blue background with transparency */
+  padding: 20px;
+  border: 2px solid rgba(0, 0, 255, 0.5); /* Distinct border with transparency */
+  border-radius: 8px;
+}
+
+/* Styling for the form elements */
+.appointment-form-container label,
+.appointment-form-container input,
+.appointment-form-container select {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Styling for the form submit button */
+.appointment-form-container button[type="submit"] {
+  margin-top: 10px;
+  background-color: #007bff; /* Blue color for the button */
+  color: #fff; /* Text color for the button */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.appointment-form-container button[type="submit"]:hover {
+  background-color: #0056b3; /* Darker blue color on hover */
+}
