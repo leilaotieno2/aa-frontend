@@ -1,4 +1,13 @@
-
+.Appointment-container {
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20190223/ourmid/pngtree-doctor-running-minimalist-background-structure-image_66071.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  /* Add additional styling for the form and other elements if needed */
+  
   
 
   

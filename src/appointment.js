@@ -62,6 +62,8 @@ const Appointment = () => {
     return appointments.some((appointment) => appointment.start_time === startTime);
   };
 
+  const [isAppointmentCreated, setIsAppointmentCreated] = useState(false); // State variable to track appointment creation
+
   const handleCreateAppointment = async (event) => {
     event.preventDefault();
 
@@ -93,6 +95,10 @@ const Appointment = () => {
           insurancedetails: '',
           category: '',
         });
+        setIsAppointmentCreated(true); // Set the state variable to true after successful appointment creation
+        setTimeout(() => {
+          setIsAppointmentCreated(false); // Reset the state variable after 3 seconds to hide the message
+        }, 3000);
       } else {
         console.error('Failed to create appointment');
       }
@@ -101,23 +107,26 @@ const Appointment = () => {
     }
   };
 
+  const handleDeleteAppointment = async (id) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/appointments/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        fetchAppointments(); // Refresh appointments list after deletion
+      } else {
+        console.error('Failed to delete appointment');
+      }
+    } catch (error) {
+      console.error('Error deleting appointment', error);
+    }
+  };
+
   return (
-    <div
-    className="Appointment-container"
-    style={{
-      backgroundImage: `url("https://png.pngtree.com/thumb_back/fh260/background/20190223/ourmid/pngtree-doctor-running-minimalist-background-structure-image_66071.jpg")`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '100vh',
-      width: '100vw', // Set the width to the full viewport width
-      overflow: 'hidden', // Hide any overflowing content outside the viewport
-    }}
-  >
+    <div className="Appointment-container">
       <h2>Appointments</h2>
+      {isAppointmentCreated && <p>Appointment created successfully!</p>}
       <form onSubmit={handleCreateAppointment} className="form-container">
         <div className="form-group">
           <label>
@@ -221,10 +230,27 @@ const Appointment = () => {
           </label>
         </div>
         <div className="form-group">
-          <button type="submit">Create Appointment</button>  <button onClick={() => window.location.href = '/'}>Home</button>
+          <button type="submit">Create Appointment</button>
+          <button onClick={() => window.location.href = '/'}>Home</button>
         </div>
-        
       </form>
+
+      <div className="appointments-list">
+  <h3>Appointment List</h3>
+  {appointments.map((appointment) => (
+    <div key={appointment.id} className="appointment-item">
+      <p>Date: {appointment.appointment_date}</p>
+      <p>Start Time: {appointment.start_time}</p>
+      <p>Name: {appointment.name}</p>
+      {appointment.category ? (
+        <p>Category: {appointment.category.name}</p>
+      ) : (
+        <p>Category: N/A</p>
+      )}
+      <button onClick={() => handleDeleteAppointment(appointment.id)}>Delete</button>
+    </div>
+  ))}
+</div>
     </div>
   );
 };
