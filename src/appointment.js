@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import'/home/leila/development/code/phase-3/aa-frontend/src/appointment.css'
 const Appointment = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -7,9 +7,10 @@ const Appointment = () => {
     gender: '',
     contact_info: '',
     medical_history: '',
-    insurance_details: '',
+    insurance_details: '', // Add this line
     category_id: '',
   });
+  
 
  
   const [categoryOptions, setCategoryOptions] = useState([]);
@@ -89,9 +90,10 @@ const Appointment = () => {
         </label>
         <br />
         <label>
-          Insurance Details:
-          <input type="text" name="insuarance_details" value={formData.insurance_details} onChange={handleChange} />
-        </label>
+  Insurance Details:
+  <input type="text" name="insurance_details" value={formData.insurance_details} onChange={handleChange} />
+</label>
+
         <br />
         <label>
   Category ID:
